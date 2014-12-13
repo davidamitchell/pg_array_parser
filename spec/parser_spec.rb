@@ -99,5 +99,10 @@ describe 'PgArrayParser' do
         parser.parse_pg_array(%[{1,{2,{3,4}},{NULL,6},7}]).should eq ['1',['2',['3','4']],[nil,'6'],'7']
       end
     end
+    context 'normal string without pg array syntax' do
+      it 'returns the same string without attempting to convert to an array' do
+        parser.parse_pg_array(%[normal string]).should eq 'normal string'
+      end
+    end
   end
 end
